@@ -3,7 +3,8 @@ import {FlightService, Flight} from '@flight-workspace/flight-api';
 import { Observable } from 'rxjs';
 import * as fromFlightBooking from '../+state/reducers/flight-booking.reducer';
 import { Store, select } from '@ngrx/store';
-import { FlightsLoadedAction } from '../+state/actions/flight-booking.actions';
+import { FlightsLoadedAction, FlightUpdateAction, FlightLoadAction } from '../+state/actions/flight-booking.actions';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'flight-search',
@@ -18,9 +19,9 @@ export class FlightSearchComponent implements OnInit {
 
   flights$: Observable<Flight[]>;
 
-  get flights() {
+  /* get flights() {
     return this.flightService.flights;
-  }
+  } */
 
   // "shopping basket" with selected flights
   basket: object = {
@@ -28,9 +29,7 @@ export class FlightSearchComponent implements OnInit {
     "5": true
   };
 
-  constructor(
-    private flightService: FlightService,
-    private store: Store<fromFlightBooking.FeatureState>) {
+  constructor(private store: Store<fromFlightBooking.FeatureState>) {
   }
 
   ngOnInit() {
@@ -46,18 +45,43 @@ export class FlightSearchComponent implements OnInit {
 /*     this.flightService
       .load(this.from, this.to, this.urgent); */
     
-    this.flightService
+/*     this.flightService
       .find(this.from, this.to)
       .subscribe(
         flights =>
           this.store.dispatch(new FlightsLoadedAction(flights)),
         error =>
             console.error('error', error)
+      ); */
+
+      this.store.dispatch(
+        new FlightLoadAction(this.from, this.to)
       );
   }
 
   delay(): void {
-    this.flightService.delay();
+    //this.flightService.delay();
+
+    this.flights$
+      .pipe(
+        first()
+      )
+      .subscribe(
+        flights => {
+          const flight = flights[0];
+
+          const oldDate = new Date(flight.date);
+          const newDate = new Date(oldDate.getTime() + 15 * 60 * 1000);
+          const newFlight = {
+            ...flight,
+            date: newDate.toISOString()
+          };
+
+          this.store.dispatch(
+            new FlightUpdateAction(newFlight)
+          );
+        }
+      );
   }
 
 }
