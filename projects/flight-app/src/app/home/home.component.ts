@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import { AuthService } from '../shared/auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,9 @@ export class HomeComponent implements OnInit {
 
   expertMode: boolean = false;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(
+    private route: ActivatedRoute,
+    private authService: AuthService) {
   }
 
   changed($event): void {
@@ -28,15 +31,15 @@ export class HomeComponent implements OnInit {
   }
 
   get userName(): string {
-    return this._userName;
+    return this.authService.username;
   }
 
   login(): void {
-    this._userName = 'Login will be implemented in another exercise!'
+    this.authService.login(); // 'Login will be implemented in another exercise!'
   }
 
   logout(): void {
-    this._userName = '';
+    this.authService.logout();
   }
 
 
