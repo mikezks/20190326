@@ -405,6 +405,106 @@
           }
         }
       }
+    },
+    "router-comp-cache": {
+      "root": "projects/router-comp-cache/",
+      "sourceRoot": "projects/router-comp-cache/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/router-comp-cache",
+            "index": "projects/router-comp-cache/src/index.html",
+            "main": "projects/router-comp-cache/src/main.ts",
+            "polyfills": "projects/router-comp-cache/src/polyfills.ts",
+            "tsConfig": "projects/router-comp-cache/tsconfig.app.json",
+            "assets": [
+              "projects/router-comp-cache/src/favicon.ico",
+              "projects/router-comp-cache/src/assets"
+            ],
+            "styles": [
+              "projects/router-comp-cache/src/styles.css"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/router-comp-cache/src/environments/environment.ts",
+                  "with": "projects/router-comp-cache/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "router-comp-cache:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "router-comp-cache:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "router-comp-cache:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/router-comp-cache/src/test.ts",
+            "polyfills": "projects/router-comp-cache/src/polyfills.ts",
+            "tsConfig": "projects/router-comp-cache/tsconfig.spec.json",
+            "karmaConfig": "projects/router-comp-cache/karma.conf.js",
+            "styles": [
+              "projects/router-comp-cache/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/router-comp-cache/src/favicon.ico",
+              "projects/router-comp-cache/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/router-comp-cache/tsconfig.app.json",
+              "projects/router-comp-cache/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "flight-app",

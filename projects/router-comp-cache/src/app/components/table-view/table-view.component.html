@@ -1,0 +1,18 @@
+<div class="outlet">
+  <h1>Table View Component</h1><br>
+  <input><br>
+  <a [routerLink]="['/', { outlets: {
+    left: 'table-view/dyn-table',
+    right: 'list-items-view/dyn-list-items-people' 
+  }} ]">List Items: People</a>
+  <br>
+  <a [routerLink]="['/', { outlets: {
+    left: 'table-view/dyn-table',
+    right: 'list-items-view/dyn-list-items-server' 
+  }} ]">List Items: Server</a>
+  <br>
+  <a [routerLink]="['/', { outlets: {
+    left: 'table-view/dyn-table',
+    right: 'default-view/dyn-default' 
+  }} ]">Default</a>  
+</div>

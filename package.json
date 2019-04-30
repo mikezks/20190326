@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --project flight-app -o",
+    "start:routerapp": "ng serve --project router-comp-cache --port 4500 -o",
     "build": "ng build",
     "build:lib": "ng build --project logger-lib",
     "test": "ng test",

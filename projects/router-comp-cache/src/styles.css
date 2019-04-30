@@ -1,0 +1,20 @@
+html, body, app-root, .container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: calc(100% - 5px);
+    overflow: hidden;
+}
+
+ng-component {
+    display: contents;
+}
+
+.container > ng-component > *:not(router-outlet) {
+    border-width: 2px;
+    border-style: dotted;
+    padding: 0 15px 15px 15px;
+    margin: 5px;
+    flex: 0 1 50%;
+}
