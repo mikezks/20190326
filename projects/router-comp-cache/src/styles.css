@@ -1,20 +1,55 @@
-html, body, app-root, .container {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+html, body, app-root {
+    font-family: 'Metropolis', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: calc(100% - 5px);
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
     overflow: hidden;
 }
 
-ng-component {
-    display: contents;
+.container-main,
+ng-component,
+.container-left > ng-component >  *:not(router-outlet),
+.container-right > ng-component > *:not(router-outlet) {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
 }
 
-.container > ng-component > *:not(router-outlet) {
-    border-width: 2px;
-    border-style: dotted;
+.container-left,
+.container-right {
+    display: flex;
+    width: 50%;    
+}
+
+.outlet {
+    width: 100%;
     padding: 0 15px 15px 15px;
-    margin: 5px;
-    flex: 0 1 50%;
+}
+
+div {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+h1 {
+    font-weight: 400;
+}
+
+a {
+    display: block;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, .3);
+    text-decoration: none;
+    margin: 10px 0;
+}
+
+input {
+    font-family: 'Metropolis', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    display: block;
+    padding: 10px;
+    border: none;
+    background-color: rgba(255, 255, 255, .8);
+    margin: 10px 0;
 }

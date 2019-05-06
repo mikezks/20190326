@@ -1,12 +1,16 @@
 <div class="outlet">
   <h1>{{ title$ | async }}</h1>
+  <a
+    *ngFor="let nav of topNav$ | async"
+    [routerLink]="nav.path | dynLink">
+    {{ nav.label }}</a>
   <input
     *ngFor="let control of form$ | async"
     [ngModel]="control.value"
     [name]="control.name"
     [placeholder]="control.label">
   <a
-    *ngFor="let nav of navigation$ | async"
+    *ngFor="let nav of bottomNav$ | async"
     [routerLink]="nav.path | dynLink">
     {{ nav.label }}</a>
 </div>

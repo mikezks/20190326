@@ -1,29 +1,40 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouteReuseStrategy, UrlSerializer } from '@angular/router';
+
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
+import { GenericContainerComponent } from './components/generic-container.component';
 import { DefaultViewComponent } from './components/default-view/default-view.component';
-import { TableViewComponent } from './components/table-view/table-view.component';
-import { ListItemsViewComponent } from './components/list-items-view/list-items-view.component';
-import { UrlSerializer, RouteReuseStrategy, ActivatedRoute, Router } from '@angular/router';
-import { StandardUrlSerializer } from './router/custom-url-serializer';
+import { ListViewComponent } from './components/list-view/list-view.component';
+import { DetailViewComponent } from './components/detail-view/detail-view.component';
+
 import { CustomReuseStrategy } from './router/custom-reuse-strategy';
+import { CustomUrlSerializerService } from './router/custom-url-serializer.service';
+import { RouterDynLinkTransformPipe } from './router/router-dyn-link-transform.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
+    GenericContainerComponent,
     DefaultViewComponent,
-    TableViewComponent,
-    ListItemsViewComponent,
+    ListViewComponent,
+    DetailViewComponent,
+    RouterDynLinkTransformPipe,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: CustomReuseStrategy },
-    { provide: UrlSerializer, useClass: StandardUrlSerializer }
+    { provide: UrlSerializer, useClass: CustomUrlSerializerService },
+    { provide: CustomUrlSerializerService, useExisting: UrlSerializer }
   ],
   bootstrap: [AppComponent]
 })
